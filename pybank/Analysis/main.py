@@ -48,11 +48,14 @@ with open(csvpath) as csvfile:
     avgchange= sumchange/(len(change))
 
 with open(outpath,'w') as txtfile:
-    txtfile.write("Financial Analysis")
-    txtfile.write("----------------------------")
-    txtfile.write("Financial Analysis")
-    txtfile.write("Financial Analysis")
-
+    txtfile.write("Financial Analysis \n")
+    txtfile.write("----------------------------\n")
+    txtfile.write(f"Total Months : {totalMonths}\n")
+    txtfile.write(f"Total : $ {ProfitsLosses}\n")
+    txtfile.write(f"Average Change : $ {avgchange}\n")
+    txtfile.write(f"Greatest Increase in Profits: {monthIncr} $ {gretIncr}\n")
+    txtfile.writ(f"Greatest Decrease in Profits: {monthDecr} $ {gretDecr}\n")
+    
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months : {totalMonths}")

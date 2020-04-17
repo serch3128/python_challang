@@ -1,11 +1,13 @@
 import os
 import csv
 csvpath = os.path.join('..', 'Resources', 'election_data.csv')
+outpath=os.path.join('output.txt')
 votes=[]
 candidates=[]
 votesforeach=[0,0,0,0,0]
 votesforeachp=[]
 uniquecandidates=[]
+
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     print(csvreader)      
@@ -28,33 +30,47 @@ with open(csvpath) as csvfile:
                 votesforeach[x]=votesforeach[x]+1
 
     for row in range(len(votesforeach)):
-        a=votesforeach[row]/voteCounter
+        a=round(((votesforeach[row]/voteCounter)*100), 2)
         votesforeachp.append(a)
 
-print(votesforeachp)
+    for row in range(len(votesforeach)):
+        winner= votesforeach[0]
+        if winner<= votesforeach[row]:
+            winner=uniquecandidates[row]
+        else:
+            winner=uniquecandidates[0]
+        
+
+    
+
+with open(outpath,'w') as txtfile:
+    txtfile.write("Election Results\n")
+    txtfile.write("-----------------------------\n")
+    txtfile.write(f"Total Votes {voteCounter} \n")
+    txtfile.write("-----------------------------\n")
+    txtfile.write(f"{uniquecandidates[0]} : {votesforeachp[0]} % ({votesforeach[0]})\n")
+    txtfile.write(f"{uniquecandidates[1]} : {votesforeachp[1]} % ({votesforeach[1]})\n")
+    txtfile.write(f"{uniquecandidates[2]} : {votesforeachp[2]} % ({votesforeach[2]})\n")
+    txtfile.write(f"{uniquecandidates[3]} : {votesforeachp[3]} % ({votesforeach[3]})\n")
+    txtfile.write(f"{uniquecandidates[4]} : {votesforeachp[4]} % ({votesforeach[4]})\n")
+    txtfile.write("-------------------------------\n")
+    txtfile.write(f"Winner : {winner}\n")
+    txtfile.write("--------------------------------\n")
 
 
 print("Election Results")
 print("-----------------------------")
 print(f"Total Votes {voteCounter} ")
 print("-----------------------------")
-
-
-
-print(votesforeach)
-
-
-        
-
-print(uniquecandidates) 
-        
-
-    
+for x in range(len(uniquecandidates)):
+    print(f"{uniquecandidates[x]} : {votesforeachp[x]} % ({votesforeach[x]})")
+print("-------------------------------")
+print(f"Winner : {winner}")
+print("--------------------------------")
 
 
 
 
-print(len(candidates))
 
 
 
